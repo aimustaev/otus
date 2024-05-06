@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: hello-deployment
+    labels:
+      apps: hello-dp
+spec:
+    replicas: 3
+    minReadySeconds: 10
+    strategy:
+      rollingUpdate:
+         maxSurge: 1
+         maxUnavailable: 1
+      type: RollingUpdate
+    selector:
+       matchLabels:
+          app: dev
+    template:
+       metadata:
+          labels:
+             app: dev
+       spec:
+          containers:
+          - name: hello-js
+            image: airat139/otus:docker04
+            ports:
+              - name: web
+                containerPort: 8000
