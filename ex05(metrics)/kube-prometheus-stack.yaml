@@ -1,0 +1,56 @@
+prometheus:
+  prometheusSpec:
+    serviceMonitorSelectorNilUsesHelmValues: false
+    serviceMonitorSelector: {}
+
+    externalUrl: http://arch.homework/prometheus
+    routePrefix: /prometheus
+
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    hosts:
+      - arch.homework
+    paths:
+      - /prometheus # does not need regex capture like others
+
+alertmanager:
+  alertmanagerSpec:
+    externalUrl: http://arch.homework/alertmanager
+    routePrefix: / # does not need alertmanager suffix
+
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    annotations:
+      nginx.ingress.kubernetes.io/rewrite-target: /$2
+    hosts:
+      - arch.homework
+    paths:
+      - "/alertmanager(/|$)(.*)"
+
+grafana:
+  sidecar:
+    dashboards:
+      enabled: true
+      label: grafana-dashboard
+  # adminPassword: prom-operator  # username is "admin"
+
+  # env:
+  #   GF_SERVER_ROOT_URL: http://arch.homework/grafana
+  #   GF_SERVER_SERVE_FROM_SUB_PATH: 'true'
+
+  # ingress:
+  #   enabled: true
+  #   ingressClassName: nginx
+  #   annotations:
+  #     nginx.ingress.kubernetes.io/rewrite-target: /$2
+  #   hosts:
+  #     - arch.homework
+  #   path: "/grafana(/|$)(.*)"
+  #   pathType: ImplementationSpecific
+
+  # dashboards:
+  #   default:
+  #     otus-ms-arch:
+  #       file: grafana/dashboard.json
