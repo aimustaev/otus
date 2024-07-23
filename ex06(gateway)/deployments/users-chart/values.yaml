@@ -1,0 +1,17 @@
+replicaCount: 2
+
+image:
+  repository: airat139/otus
+
+service:
+  type: ClusterIP
+  targetPort: 8000
+
+
+postgresql:
+  enabled: true
+  postgresqlUsername: myuser
+  postgresqlPassword: passwd
+  postgresqlDatabase: myapp
+  service:
+    port: "5432"

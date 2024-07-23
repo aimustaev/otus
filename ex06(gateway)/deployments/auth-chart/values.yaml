@@ -1,0 +1,8 @@
+replicaCount: 2
+
+image:
+  repository: airat139/otus
+
+service:
+  type: ClusterIP
+  targetPort: 8001

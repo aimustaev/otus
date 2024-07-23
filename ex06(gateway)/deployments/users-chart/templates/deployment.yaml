@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "hello-chart.fullname" . }}
+  labels:
+    {{- include "hello-chart.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "hello-chart.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "hello-chart.selectorLabels" . | nindent 8 }}
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/config.yaml") . | sha256sum }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.targetPort }}
+              protocol: TCP
+          env:
+            - name: DATABASE_URI
+              valueFrom:
+                secretKeyRef:
+                  name: hello-secret
+                  key: DATABASE_URI
+            - name: GREETING
+              valueFrom:
+                configMapKeyRef:
+                  name: hello-config
+                  key: GREETING
+            - name: PG_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: hello-config
+                  key: PG_USER
+            - name: PG_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: hello-config
+                  key: PG_HOST
+            - name: PG_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: hello-config
+                  key: PG_PORT
+            - name: PG_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: hello-config
+                  key: PG_DATABASE
+            - name: PG_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: hello-config
+                  key: PG_PASSWORD

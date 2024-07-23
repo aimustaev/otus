@@ -1,0 +1,46 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hello-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/auth-url: http://auth-auth-svc.auth.svc.cluster.local/auth
+    nginx.ingress.kubernetes.io/auth-response-headers: X-UserId
+
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: arch.homework
+      http:
+        paths:
+          - path: /users
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ include "hello-chart.fullname" . }}
+                port:
+                  number: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hello-ingress-white-list
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: arch.homework
+      http:
+        paths:
+          - path: /create
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ include "hello-chart.fullname" . }}
+                port:
+                  number: 80
+          - path: /config
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ include "hello-chart.fullname" . }}
+                port:
+                  number: 80

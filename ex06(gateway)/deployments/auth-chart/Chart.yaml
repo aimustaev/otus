@@ -1,0 +1,8 @@
+apiVersion: v2
+name: auth-svc
+description: A Helm chart for Kubernetes
+
+type: application
+
+version: 0.4.0
+appVersion: auth02
