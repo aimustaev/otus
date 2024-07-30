@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "9bb48704-8b5b-4afd-b2d3-04202f9f2286",
-		"name": "Otus",
+		"_postman_id": "ef8ed59d-55ae-460a-ac3e-e8b4ebef0e41",
+		"name": "Otus Copy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "16558391"
 	},
@@ -21,11 +21,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://arch.homework/create",
+					"raw": "http://{{baseUrl}}/create",
 					"protocol": "http",
 					"host": [
-						"arch",
-						"homework"
+						"{{baseUrl}}"
 					],
 					"path": [
 						"create"
@@ -49,11 +48,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://arch.homework/login",
+					"raw": "http://{{baseUrl}}/login",
 					"protocol": "http",
 					"host": [
-						"arch",
-						"homework"
+						"{{baseUrl}}"
 					],
 					"path": [
 						"login"
@@ -80,11 +78,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://arch.homework/users/2",
+					"raw": "http://{{baseUrl}}/users/2",
 					"protocol": "http",
 					"host": [
-						"arch",
-						"homework"
+						"{{baseUrl}}"
 					],
 					"path": [
 						"users",
@@ -112,11 +109,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://arch.homework/users/1",
+					"raw": "http://{{baseUrl}}/users/1",
 					"protocol": "http",
 					"host": [
-						"arch",
-						"homework"
+						"{{baseUrl}}"
 					],
 					"path": [
 						"users",
@@ -141,11 +137,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://arch.homework/users/2",
+					"raw": "http://{{baseUrl}}/users/2",
 					"protocol": "http",
 					"host": [
-						"arch",
-						"homework"
+						"{{baseUrl}}"
 					],
 					"path": [
 						"users",
@@ -173,11 +168,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://arch.homework/users/2",
+					"raw": "http://{{baseUrl}}/users/2",
 					"protocol": "http",
 					"host": [
-						"arch",
-						"homework"
+						"{{baseUrl}}"
 					],
 					"path": [
 						"users",
@@ -205,11 +199,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://arch.homework/logout",
+					"raw": "http://{{baseUrl}}/logout",
 					"protocol": "http",
 					"host": [
-						"arch",
-						"homework"
+						"{{baseUrl}}"
 					],
 					"path": [
 						"logout"
@@ -236,11 +229,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://arch.homework/users/2",
+					"raw": "http://{{baseUrl}}/users/2",
 					"protocol": "http",
 					"host": [
-						"arch",
-						"homework"
+						"{{baseUrl}}"
 					],
 					"path": [
 						"users",
@@ -249,6 +241,35 @@
 				}
 			},
 			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "arch.homework",
+			"type": "string"
 		}
 	]
 }
